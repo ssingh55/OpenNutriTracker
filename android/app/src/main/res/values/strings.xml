@@ -6,4 +6,7 @@
          visually distinguishable on the home screen from a Play Store
          install. -->
     <string name="app_name">OpenNutriTracker</string>
+    
+    <!-- Label for the secure input method keyboard subtype -->
+    <string name="secure_keyboard_subtype_label">Secure Keyboard</string>
 </resources>

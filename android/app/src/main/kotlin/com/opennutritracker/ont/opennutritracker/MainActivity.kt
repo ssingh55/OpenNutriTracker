@@ -3,6 +3,7 @@ package com.opennutritracker.ont.opennutritracker
 import android.app.LocaleManager
 import android.content.Intent
 import android.os.Build
+import android.os.Bundle
 import android.os.LocaleList
 import io.flutter.embedding.android.FlutterFragmentActivity
 import io.flutter.embedding.engine.FlutterEngine
@@ -43,6 +44,16 @@ class MainActivity : FlutterFragmentActivity() {
      * racing engine startup for the one launch that most needs to work.
      */
     private var healthRationalePending = false
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        // Defense-in-depth: Prevent StrandHogg 2.0 by ensuring the activity is the root of its task.
+        // If not, it means another activity (potentially malicious) has launched it in its own task.
+        if (!isTaskRoot) {
+            finish()
+            return
+        }
+    }
 
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
